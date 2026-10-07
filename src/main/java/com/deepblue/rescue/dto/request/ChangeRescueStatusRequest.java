@@ -2,9 +2,12 @@ package com.deepblue.rescue.dto.request;
 
 import com.deepblue.rescue.domain.RescueStatus;
 
+import jakarta.validation.constraints.NotNull;
+
 public record ChangeRescueStatusRequest(
-
-        RescueStatus status
-
+@NotNull(
+message = "Status is required"
+)
+RescueStatus status
 ) {
 }

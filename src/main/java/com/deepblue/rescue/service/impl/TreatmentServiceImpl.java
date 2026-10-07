@@ -42,10 +42,10 @@ public class TreatmentServiceImpl implements TreatmentService {
         this.mapper = mapper;
     }
 
-    @Override
-    public List<TreatmentResponse> findByAnimalCode(Long animalCode) {
+        @Override
+    public List<TreatmentResponse> findByAnimalCode(String animalCode) {
         return treatmentRepository
-                .findByAnimalIdOrderByPerformedAtAsc(animalCode)
+                .findByAnimalAnimalCode(animalCode)
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
@@ -92,6 +92,5 @@ public class TreatmentServiceImpl implements TreatmentService {
  
 
     }
-
 
 }
