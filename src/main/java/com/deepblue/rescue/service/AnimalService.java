@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface AnimalService {
     AnimalResponse findByCode(String animalCode);
-    List findAnimalsInRehabilitation();
+    List<AnimalResponse> findAnimalsInRehabilitation();
     boolean canReceiveTreatment(String animalCode);
 }

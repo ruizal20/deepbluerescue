@@ -10,7 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface TreatmentRepository extends JpaRepository<Treatment, Long> {
-    List<Treatment> findByAnimalIdOrderByPerformedAtAsc(long animalCode);
+    List<Treatment> findByAnimalIdOrderByPerformedAtAsc(long animalId);
+    List<Treatment> findByAnimalAnimalCode(String animalCode);
 
     @Query("""
             SELECT t

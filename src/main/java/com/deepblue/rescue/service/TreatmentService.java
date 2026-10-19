@@ -8,5 +8,5 @@ import com.deepblue.rescue.dto.response.TreatmentResponse;
 public interface TreatmentService {
     TreatmentResponse register(CreateTreatmentRequest request);
 
-    List<TreatmentResponse> findByAnimalCode(Long animalCode);
+    List<TreatmentResponse> findByAnimalCode(String animalCode);
 }
