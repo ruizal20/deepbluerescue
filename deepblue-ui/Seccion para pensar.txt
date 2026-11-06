@@ -1,0 +1,27 @@
+# SECCION: PARA PENSAR 
+
+### 1. ¿Por qué usamos `/api/...` en lugar de escribir la URL completa del backend?
+
+Utilizamos `/api/...` porque configuramos Vite para que redirija esas peticiones al backend, que se encuentra en `http://localhost:8080`. De esta manera, no tenemos que escribir la dirección completa del servidor cada vez que necesitamos consultar información. Además, esto facilita el trabajo durante el desarrollo.
+
+### 2. ¿Por qué la función `request()` lanza un error en lugar de devolverlo como si fuera una respuesta normal?
+
+Porque, cuando ocurre un error, necesitamos que el frontend se dé cuenta de que la petición no salió bien. Al utilizar un `throw`, TanStack Query reconoce que la consulta falló y nos permite mostrar un mensaje de error al usuario. Si devolviéramos el error como un dato normal, la aplicación podría interpretarlo como una respuesta exitosa y no manejaría correctamente la situación.
+
+### 3. ¿Qué pasaría si no incluyéramos el estado en `queryKey`?
+
+Las consultas de los diferentes estados podrían utilizar la misma clave. TanStack Query podría confundir los resultados porque no tendría una clave diferente para cada consulta. Por eso incluimos el estado, ya que así podemos identificar cada consulta y mostrar la información correspondiente al filtro seleccionado.
+
+### 4. ¿Para qué sirve la propiedad `enabled` en las consultas de los animales?
+
+La propiedad `enabled` sirve para controlar cuándo debe ejecutarse una consulta. En este caso, hacemos que las consultas se ejecuten solamente cuando tenemos un código de animal válido. Esto es importante porque así evitamos solicitudes innecesarias y posibles errores.
+
+### 5. ¿Por qué utilizamos `invalidateQueries` después de cambiar el estado de un caso?
+
+Utilizamos `invalidateQueries` para poder indicarle a TanStack Query que la información guardada sobre los casos puede haber cambiado. Cuando modificamos el estado de un caso, las listas que muestran los casos admitidos, en evaluación o en otros estados podrían necesitar actualizarse. Al invalidar las consultas que comienzan con la clave `['rescue-cases']`, permitimos que TanStack Query actualice la información cuando corresponda, sin tener que recargar manualmente toda la página.
+
+### 6. ¿Qué ventajas tiene utilizar `useReducer` para el formulario y por qué invalidamos la consulta del animal?
+
+Porque nos ayuda a organizar mejor el estado del formulario, ya que este tiene varios campos que debemos controlar, como el especialista, la fecha, el tipo de tratamiento y la descripción. En lugar de manejar cada cambio por separado, podemos centralizar las acciones para actualizar los campos o limpiar el formulario cuando el tratamiento se registra correctamente.
+
+Por otra parte, invalidamos la consulta del animal porque, después de registrar un tratamiento, la información relacionada con ese animal puede cambiar. Al invalidar la clave `['animal', animalCode]`, también podemos actualizar las consultas relacionadas que utilizan esa clave como inicio, como el historial de tratamientos y la elegibilidad. De esta forma, la interfaz puede mostrar los datos actualizados sin que tengamos que recargar la página manualmente.
